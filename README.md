@@ -467,5 +467,53 @@ Config `package.json`
   },
 ...
 ```
+22. Husky config
+```sh
+yarn add -D husky@4 lint-staged
+```
+Define lint stage tool configuration
+```sh
+// package.json
+...
+{
+  "name": "react-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "scripts": {
+  ...
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.9",
+    "webpack-merge": "^6.0.1"
+  },
+  ...
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "eslint --fix"
+    ],
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
+  }
+
+}
+...
+```
+
+
+
+
+
+
 
 <!-- https://youtu.be/xKQ2rEoYmXw?si=F9zMtUxG5kxpGpxd -->
