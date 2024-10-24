@@ -441,5 +441,31 @@ Config `eslint` in `package.json`
 ```
 `yarn lint`
 
+21. Prettier config
+```sh
+yarn add -D prettier eslint-config-prettier eslint-plugin-prettier
+```
+Define config for prettier. Create a file in root call `.prettierrc.js`
+```sh
+module.exports = {
+  semi: false,
+  trailingComma: "es6",
+  singleQuote: false,
+  printWidth: 80,
+  tabWidth: 2,
+  endOfLine: "auto",
+};
+```
+Config `package.json`
+```sh
+...
+"scripts": {
+    "start": "webpack serve --config webpack/webpack.config.js --env env=dev --open",
+    "build": "webpack --config webpack/webpack.config.js --env env=prod",
+    "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
+    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+  },
+...
+```
 
 <!-- https://youtu.be/xKQ2rEoYmXw?si=F9zMtUxG5kxpGpxd -->
