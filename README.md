@@ -511,8 +511,58 @@ Define lint stage tool configuration
 ```
 
 
+23. Let add tailwincss to project
+```sh
+yarn add -D tailwindcss postcss autoprefixer
+```
+```sh
+yarn tailwindcss init -p
+```
+`tailwind.config.js`
+```sh
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx,html}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+`./src/styles.css`
+```sh
+/* ./src/styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+`config in webpack.common.js`
+```sh
+yarn add -D postcss-loader
+```
+```sh
+  ...
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+    ],
+  },
+  ...
+```
+Ensure `postcss.config.js` is Present
+```sh
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+```
 
-
+`yarn start`
 
 
 
