@@ -384,15 +384,62 @@ module.exports = {
 };
 ```
 After config this, Let restart your app: `yarn start`
+- Issue solved.
+
+20. Esline config
+```sh
+yarn add -D eslint
+yarn add -D eslint-plugin-react eslint-plugin-react-hooks
+yarn add -D @typescript-eslint/parser @typescript-eslint/eslint-plugin
+yarn add -D eslint-plugin-import eslint-plugin-jsx-a11y
+```
+To config eslint. create a file in root call `.eslintrc.js`
+```sh
+module.exports = {
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: "module",
+  },
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
+  extends: [
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:jsx-a11y/recommended",
+    "plugin:eslint-comments/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended",
+  ],
+  rules: {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-var-requires": "off",
+    "react/prop-types": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+  },
+};
+```
+Config `eslint` in `package.json`
+```sh
+...
+ "scripts": {
+    "start": "webpack serve --config webpack/webpack.config.js --env env=dev --open",
+    "build": "webpack --config webpack/webpack.config.js --env env=prod",
+    "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\""
+  },
+...
+```
+`yarn lint`
 
 
-
-
-
-
-
-
-
-
-
-  <!-- https://youtu.be/xKQ2rEoYmXw?si=F9zMtUxG5kxpGpxd -->
+<!-- https://youtu.be/xKQ2rEoYmXw?si=F9zMtUxG5kxpGpxd -->
