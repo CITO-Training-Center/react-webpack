@@ -565,5 +565,47 @@ module.exports = {
 `yarn start`
 
 
+24. Fix import file extension issue
+```sh
+// apps/dashboard-app/src/declaration.d.ts
+
+declare module '*.png'
+declare module '*.jpeg'
+declare module '*.svg' {
+  const content: string
+  export default content
+}
+```
+  - If need more file extension, Let add more:)
+
+25. Fix alias for reacjs + typescript for project setup from scratch
+  - Config in `alias` in `tsconfig.json`
+```sh
+{
+  "compilerOptions": {
+  ...
+    "resolveJsonModule": true,
+    "baseUrl": ".", 
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
+```
+  - Add `alias` config to `webpack.common.js`
+```sh
+...
+resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      "@": path.resolve(__dirname, "../"),
+    },
+  },
+...
+```
+
+
+
 
 <!-- https://youtu.be/xKQ2rEoYmXw?si=F9zMtUxG5kxpGpxd -->
