@@ -605,6 +605,67 @@ resolve: {
 ...
 ```
 
+26. How to config file `env` in react+webpack
+ - Install dependacies
+```sh
+yarn add -D dotenv-webpack
+```
+ - Create a file for env like `.env.local`
+```sh
+REACT_APP_API_URL=http://127.0.0.1:8000/api/v1/project/
+```
+ - Config in webpage.command.js
+```sh
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
+
+module.exports = {
+  entry: path.resolve(__dirname, "..", "./src/index.tsx"),
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      "@": path.resolve(__dirname, "../"),
+    },
+  },
+  ...
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "..", "./public/index.html"),
+    }),
+    new Dotenv({
+      path: ".env.local", // Path to .env file
+      safe: true, // Load .env.example
+      systemvars: true, // Load all system variables
+      defaults: false,
+    }),
+  ],
+};
+```
+ - Create dir `types` in root and create a file inside it name `env.d.ts`
+```sh
+declare namespace NodeJS {
+    interface ProcessEnv {
+        REACT_APP_API_URL: string;
+    }
+  }
+```
+ - Test invoke it to use
+```sh
+const url_api = process.env.REACT_APP_API_URL as string
+console.log(url_api)
+const response = await CreateProject({
+  url: url_api,
+  method: "POST",
+  data: {
+    project_name: projectNameState,
+    project_description: descriptionState,
+  },
+});
+```
+
+# End
+
 
 
 
